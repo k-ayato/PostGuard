@@ -1,0 +1,62 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 背景の縦グラデーション（ダーク） -->
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1024" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#16161F"/>
+      <stop offset="1" stop-color="#09090E"/>
+    </linearGradient>
+    <!-- 盾の背後のパープルグロー -->
+    <radialGradient id="glow" cx="512" cy="470" r="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6C63FF" stop-opacity="0.55"/>
+      <stop offset="0.6" stop-color="#6C63FF" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#6C63FF" stop-opacity="0"/>
+    </radialGradient>
+    <!-- 盾本体のグラデーション -->
+    <linearGradient id="shield" x1="512" y1="290" x2="512" y2="775" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#9189FF"/>
+      <stop offset="1" stop-color="#5A50E2"/>
+    </linearGradient>
+    <!-- 盾上部のハイライト -->
+    <linearGradient id="shieldHi" x1="512" y1="300" x2="512" y2="540" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 背景（全面：iOS側で角丸マスクされるため角丸は付けない） -->
+  <rect x="0" y="0" width="1024" height="1024" fill="url(#bg)"/>
+  <rect x="0" y="0" width="1024" height="1024" fill="url(#glow)"/>
+
+  <!-- 盾 -->
+  <g>
+    <path d="M512 296
+             C 612 350 690 360 760 360
+             C 760 540 740 660 512 772
+             C 284 660 264 540 264 360
+             C 334 360 412 350 512 296 Z"
+          fill="url(#shield)"/>
+    <path d="M512 296
+             C 612 350 690 360 760 360
+             C 760 540 740 660 512 772
+             C 284 660 264 540 264 360
+             C 334 360 412 350 512 296 Z"
+          fill="url(#shieldHi)"/>
+    <path d="M512 296
+             C 612 350 690 360 760 360
+             C 760 540 740 660 512 772
+             C 284 660 264 540 264 360
+             C 334 360 412 350 512 296 Z"
+          fill="none" stroke="#B5AEFF" stroke-opacity="0.55" stroke-width="4"/>
+  </g>
+
+  <!-- 投稿（吹き出し） -->
+  <g>
+    <rect x="384" y="402" width="256" height="172" rx="44" fill="#FFFFFF"/>
+    <path d="M452 560 L452 632 L520 566 Z" fill="#FFFFFF"/>
+  </g>
+
+  <!-- チェック（安全/守られた投稿） -->
+  <path d="M454 492 L498 536 L582 446"
+        fill="none" stroke="#6C63FF" stroke-width="30"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

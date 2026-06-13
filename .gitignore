@@ -1,0 +1,77 @@
+# ===========================
+# macOS
+# ===========================
+.DS_Store
+**/.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# ===========================
+# Xcode
+# ===========================
+
+# Build output
+DerivedData/
+build/
+*.ipa
+*.xcarchive
+.deriveddata/
+.modulecache/
+
+# Per-user settings (editor layout, breakpoints, bookmarks)
+xcuserdata/
+*.xcuserstate
+*.xccheckout
+*.xcscmblueprint
+
+# Playground cache
+playground.xcworkspace
+
+# ===========================
+# Swift Package Manager
+# ===========================
+.build/
+.swiftpm/
+
+# ===========================
+# Secrets / API Keys
+# ===========================
+# Firebase 設定: 実プロジェクトの API キー・プロジェクト ID を含むため除外。
+# 各 .example をテンプレートとしてコミットし、実ファイルは各自 Firebase コンソール
+# からダウンロードして配置する。
+PostGuard/GoogleService-Info.plist
+PostGuardKeyboard/GoogleService-Info.plist
+
+# 本体 Info.plist: Google OAuth クライアント ID を含むため除外。
+# Info.plist.example をコピーして値を埋める。
+PostGuard/Info.plist
+
+# Apple の秘密鍵・証明書類（Sign in with Apple / DeviceCheck / Push 署名鍵など）
+*.p8
+*.p12
+*.mobileprovision
+*.cer
+*.certSigningRequest
+
+# 型チェック用スクラッチ（ツールが生成。アプリ本体ではない）
+.stubcheck/
+
+# ===========================
+# Claude Code
+# ===========================
+.claude/settings.local.json
+
+# ===========================
+# CocoaPods (not used, but future-proof)
+# ===========================
+Pods/
+Podfile.lock
+
+# ===========================
+# Fastlane (not used, but future-proof)
+# ===========================
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output

@@ -1,0 +1,57 @@
+{
+  "identifier" : "F0A1B2C3-D4E5-4678-9ABC-DEF012345678",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+
+  ],
+  "settings" : {
+    "_failTransactionsEnabled" : false,
+    "_locale" : "ja_JP",
+    "_storefront" : "JPN",
+    "_storeKitErrors" : [
+
+    ]
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "A1B2C3D4-E5F6-4789-ABCD-EF0123456789",
+      "localizations" : [
+
+      ],
+      "name" : "PostGuard Pro",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "480",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "B2C3D4E5-F6A7-4890-BCDE-F01234567890",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "分析回数が無制限になります",
+              "displayName" : "PostGuard Pro",
+              "locale" : "ja_JP"
+            }
+          ],
+          "productID" : "com.postguard.app.pro.monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Pro Monthly",
+          "subscriptionGroupID" : "A1B2C3D4-E5F6-4789-ABCD-EF0123456789",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

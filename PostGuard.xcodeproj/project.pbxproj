@@ -1,0 +1,831 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 70;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		14F1022F64D34AD5A3ADD583 /* GeminiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E918346DF8467783E1CA11 /* GeminiService.swift */; };
+		164B7C3CD6D84489A54D9BE5 /* AnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A2275949F94F6A9D619906 /* AnalysisView.swift */; };
+		1A364CD1E96C46DEA01B0D03 /* SuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B395D0B8254F68BD7E1AB6 /* SuggestionView.swift */; };
+		1B72A3798D9749B4B8FC0F3F /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043857A16BE3455595DA9F48 /* LoadingView.swift */; };
+		3CF1A4E1CE2E4AB5A53562A8 /* PostGuardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF598A6D68D4157A2E0F6AB /* PostGuardApp.swift */; };
+		5C3E883C2FD5509E00037D85 /* PostGuardKeyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 5C3E88352FD5509E00037D85 /* PostGuardKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		60B1D10333F54739AED9A814 /* AnalysisResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D0B78415214CCCB66CF647 /* AnalysisResult.swift */; };
+		74525696CAA94D549E31B21C /* SafeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60B28462C02469AB3A82BB6 /* SafeView.swift */; };
+		74C96C06B82B476F87890F1B /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94FA0D57A37402E993021B1 /* InputView.swift */; };
+		7E2D724E3DA744A9A42E8B5D /* DesignTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067E1A73C3C14098AB65C475 /* DesignTokens.swift */; };
+		AA00000000000000000000B1 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000F1 /* AppGroup.swift */; };
+		AA00000000000000000000B2 /* AnalysisRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000F2 /* AnalysisRecord.swift */; };
+		AA00000000000000000000B3 /* SharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000F3 /* SharedStore.swift */; };
+		AA00000000000000000000B4 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000F4 /* AppRouter.swift */; };
+		AA00000000000000000000B5 /* KeyboardSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000F5 /* KeyboardSetupView.swift */; };
+		AA00000000000000000000B6 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000F6 /* HistoryView.swift */; };
+		AA00000000000000000000C1 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000F1 /* AppGroup.swift */; };
+		AA00000000000000000000C2 /* AnalysisRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000F2 /* AnalysisRecord.swift */; };
+		AA00000000000000000000C3 /* SharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000F3 /* SharedStore.swift */; };
+		AA00000000000000000000C7 /* AnalysisResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D0B78415214CCCB66CF647 /* AnalysisResult.swift */; };
+		AA00000000000000000000C8 /* GeminiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E918346DF8467783E1CA11 /* GeminiService.swift */; };
+		AA00000000000000000000C9 /* DesignTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067E1A73C3C14098AB65C475 /* DesignTokens.swift */; };
+		B15BA043C0D342B0936E338B /* RiskDimensionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E5FDA219FD4E8CB6E6CB89 /* RiskDimensionRow.swift */; };
+		BB0000000000000000000031 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BB0000000000000000000011 /* FirebaseAuth */; };
+		BB0000000000000000000032 /* FirebaseAILogic in Frameworks */ = {isa = PBXBuildFile; productRef = BB0000000000000000000012 /* FirebaseAILogic */; };
+		BB0000000000000000000033 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BB0000000000000000000013 /* FirebaseFirestore */; };
+		BB0000000000000000000034 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = BB0000000000000000000014 /* FirebaseAppCheck */; };
+		BB0000000000000000000035 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = BB0000000000000000000015 /* GoogleSignIn */; };
+		BB0000000000000000000036 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BB0000000000000000000016 /* GoogleSignInSwift */; };
+		BB0000000000000000000041 /* FirebaseAILogic in Frameworks */ = {isa = PBXBuildFile; productRef = BB0000000000000000000021 /* FirebaseAILogic */; };
+		BB0000000000000000000042 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = BB0000000000000000000022 /* FirebaseAppCheck */; };
+		BB0000000000000000000052 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000051 /* Assets.xcassets */; };
+		BB0000000000000000000054 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000053 /* PrivacyInfo.xcprivacy */; };
+		BB0000000000000000000056 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000055 /* GoogleService-Info.plist */; };
+		BB0000000000000000000059 /* FirebaseBootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000058 /* FirebaseBootstrap.swift */; };
+		BB000000000000000000005A /* FirebaseBootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000058 /* FirebaseBootstrap.swift */; };
+		BB0000000000000000000071 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000061 /* AuthService.swift */; };
+		BB0000000000000000000072 /* UsageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000062 /* UsageService.swift */; };
+		BB0000000000000000000073 /* StoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000063 /* StoreService.swift */; };
+		BB0000000000000000000074 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000064 /* LoginView.swift */; };
+		BB0000000000000000000075 /* EmailAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000065 /* EmailAuthView.swift */; };
+		BB0000000000000000000076 /* AppleSignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000066 /* AppleSignInHelper.swift */; };
+		BB0000000000000000000077 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000067 /* AccountView.swift */; };
+		BB0000000000000000000078 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000068 /* PaywallView.swift */; };
+		CC00000000000000000000B1 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC00000000000000000000F1 /* RootView.swift */; };
+		CC00000000000000000000B2 /* PlanSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC00000000000000000000F2 /* PlanSelectionView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5C3E883A2FD5509E00037D85 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 96E5DB33121C4C919AD504BF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5C3E88342FD5509E00037D85;
+			remoteInfo = PostGuardKeyboard;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5C3E883D2FD5509E00037D85 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				5C3E883C2FD5509E00037D85 /* PostGuardKeyboard.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		043857A16BE3455595DA9F48 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		067E1A73C3C14098AB65C475 /* DesignTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignTokens.swift; sourceTree = "<group>"; };
+		5C3E88352FD5509E00037D85 /* PostGuardKeyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PostGuardKeyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		90B395D0B8254F68BD7E1AB6 /* SuggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionView.swift; sourceTree = "<group>"; };
+		A9E918346DF8467783E1CA11 /* GeminiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiService.swift; sourceTree = "<group>"; };
+		AA00000000000000000000F1 /* AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
+		AA00000000000000000000F2 /* AnalysisRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisRecord.swift; sourceTree = "<group>"; };
+		AA00000000000000000000F3 /* SharedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStore.swift; sourceTree = "<group>"; };
+		AA00000000000000000000F4 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
+		AA00000000000000000000F5 /* KeyboardSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSetupView.swift; sourceTree = "<group>"; };
+		AA00000000000000000000F6 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		B33FDA01EAB54857BCB04B4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B94FA0D57A37402E993021B1 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		BB0000000000000000000051 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BB0000000000000000000053 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		BB0000000000000000000055 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BB0000000000000000000057 /* PostGuard.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = PostGuard.storekit; sourceTree = "<group>"; };
+		BB0000000000000000000058 /* FirebaseBootstrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseBootstrap.swift; sourceTree = "<group>"; };
+		BB0000000000000000000061 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		BB0000000000000000000062 /* UsageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageService.swift; sourceTree = "<group>"; };
+		BB0000000000000000000063 /* StoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreService.swift; sourceTree = "<group>"; };
+		BB0000000000000000000064 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		BB0000000000000000000065 /* EmailAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAuthView.swift; sourceTree = "<group>"; };
+		BB0000000000000000000066 /* AppleSignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInHelper.swift; sourceTree = "<group>"; };
+		BB0000000000000000000067 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		BB0000000000000000000068 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
+		C4A2275949F94F6A9D619906 /* AnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisView.swift; sourceTree = "<group>"; };
+		CC00000000000000000000F1 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		CC00000000000000000000F2 /* PlanSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanSelectionView.swift; sourceTree = "<group>"; };
+		D60B28462C02469AB3A82BB6 /* SafeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeView.swift; sourceTree = "<group>"; };
+		D8B63A938ED34E14B61783C3 /* PostGuard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PostGuard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1E5FDA219FD4E8CB6E6CB89 /* RiskDimensionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskDimensionRow.swift; sourceTree = "<group>"; };
+		EAF598A6D68D4157A2E0F6AB /* PostGuardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostGuardApp.swift; sourceTree = "<group>"; };
+		F1D0B78415214CCCB66CF647 /* AnalysisResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisResult.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		5C3E88402FD5509E00037D85 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 5C3E88342FD5509E00037D85 /* PostGuardKeyboard */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		5C3E88362FD5509E00037D85 /* PostGuardKeyboard */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (5C3E88402FD5509E00037D85 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); name = PostGuardKeyboard; path = ../PostGuardKeyboard; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		11E4DCE41F1D424C920F0575 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB0000000000000000000031 /* FirebaseAuth in Frameworks */,
+				BB0000000000000000000032 /* FirebaseAILogic in Frameworks */,
+				BB0000000000000000000033 /* FirebaseFirestore in Frameworks */,
+				BB0000000000000000000034 /* FirebaseAppCheck in Frameworks */,
+				BB0000000000000000000035 /* GoogleSignIn in Frameworks */,
+				BB0000000000000000000036 /* GoogleSignInSwift in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C3E88322FD5509E00037D85 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB0000000000000000000041 /* FirebaseAILogic in Frameworks */,
+				BB0000000000000000000042 /* FirebaseAppCheck in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		22EF1C937DA14335A4CBBE19 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				067E1A73C3C14098AB65C475 /* DesignTokens.swift */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		3353A799ED424431907D801D /* Input */ = {
+			isa = PBXGroup;
+			children = (
+				B94FA0D57A37402E993021B1 /* InputView.swift */,
+			);
+			path = Input;
+			sourceTree = "<group>";
+		};
+		48ABEABC085C47F798C6A84B /* Safe */ = {
+			isa = PBXGroup;
+			children = (
+				D60B28462C02469AB3A82BB6 /* SafeView.swift */,
+			);
+			path = Safe;
+			sourceTree = "<group>";
+		};
+		6A1358C0CDCD431FBD9C459D /* Suggestion */ = {
+			isa = PBXGroup;
+			children = (
+				90B395D0B8254F68BD7E1AB6 /* SuggestionView.swift */,
+			);
+			path = Suggestion;
+			sourceTree = "<group>";
+		};
+		6ADF99C57F0D4EB7A6C45BAD /* PostGuard */ = {
+			isa = PBXGroup;
+			children = (
+				EAF598A6D68D4157A2E0F6AB /* PostGuardApp.swift */,
+				B33FDA01EAB54857BCB04B4A /* Info.plist */,
+				BB0000000000000000000051 /* Assets.xcassets */,
+				BB0000000000000000000053 /* PrivacyInfo.xcprivacy */,
+				BB0000000000000000000055 /* GoogleService-Info.plist */,
+				BB0000000000000000000057 /* PostGuard.storekit */,
+				AA00000000000000000000E2 /* App */,
+				AA00000000000000000000E1 /* Shared */,
+				AF0F48C450CB47B8A1D25733 /* Models */,
+				7A20075B64BB48498A1B66B5 /* Services */,
+				22EF1C937DA14335A4CBBE19 /* DesignSystem */,
+				72AE5E91F3A34A90BB39446E /* Features */,
+				5C3E88362FD5509E00037D85 /* PostGuardKeyboard */,
+				AED3B58A45FB4E968C401896 /* Products */,
+			);
+			path = PostGuard;
+			sourceTree = "<group>";
+		};
+		72AE5E91F3A34A90BB39446E /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				3353A799ED424431907D801D /* Input */,
+				927F2672301E40F9A2662ED7 /* Analysis */,
+				6A1358C0CDCD431FBD9C459D /* Suggestion */,
+				48ABEABC085C47F798C6A84B /* Safe */,
+				B63D69FD70A74EFD8B014A6A /* Loading */,
+				AA00000000000000000000E3 /* Onboarding */,
+				AA00000000000000000000E4 /* History */,
+				BB00000000000000000000E1 /* Auth */,
+				BB00000000000000000000E2 /* Account */,
+				BB00000000000000000000E3 /* Paywall */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		7A20075B64BB48498A1B66B5 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A9E918346DF8467783E1CA11 /* GeminiService.swift */,
+				BB0000000000000000000061 /* AuthService.swift */,
+				BB0000000000000000000062 /* UsageService.swift */,
+				BB0000000000000000000063 /* StoreService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		927F2672301E40F9A2662ED7 /* Analysis */ = {
+			isa = PBXGroup;
+			children = (
+				C4A2275949F94F6A9D619906 /* AnalysisView.swift */,
+				E1E5FDA219FD4E8CB6E6CB89 /* RiskDimensionRow.swift */,
+			);
+			path = Analysis;
+			sourceTree = "<group>";
+		};
+		AA00000000000000000000E1 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				AA00000000000000000000F1 /* AppGroup.swift */,
+				AA00000000000000000000F2 /* AnalysisRecord.swift */,
+				AA00000000000000000000F3 /* SharedStore.swift */,
+				BB0000000000000000000058 /* FirebaseBootstrap.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		AA00000000000000000000E2 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				AA00000000000000000000F4 /* AppRouter.swift */,
+				CC00000000000000000000F1 /* RootView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		AA00000000000000000000E3 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				AA00000000000000000000F5 /* KeyboardSetupView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		AA00000000000000000000E4 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				AA00000000000000000000F6 /* HistoryView.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		AED3B58A45FB4E968C401896 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D8B63A938ED34E14B61783C3 /* PostGuard.app */,
+				5C3E88352FD5509E00037D85 /* PostGuardKeyboard.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AF0F48C450CB47B8A1D25733 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F1D0B78415214CCCB66CF647 /* AnalysisResult.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B63D69FD70A74EFD8B014A6A /* Loading */ = {
+			isa = PBXGroup;
+			children = (
+				043857A16BE3455595DA9F48 /* LoadingView.swift */,
+			);
+			path = Loading;
+			sourceTree = "<group>";
+		};
+		BB00000000000000000000E1 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				BB0000000000000000000064 /* LoginView.swift */,
+				BB0000000000000000000065 /* EmailAuthView.swift */,
+				BB0000000000000000000066 /* AppleSignInHelper.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		BB00000000000000000000E2 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				BB0000000000000000000067 /* AccountView.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		BB00000000000000000000E3 /* Paywall */ = {
+			isa = PBXGroup;
+			children = (
+				BB0000000000000000000068 /* PaywallView.swift */,
+				CC00000000000000000000F2 /* PlanSelectionView.swift */,
+			);
+			path = Paywall;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2FEB980669F447A6B3E87A94 /* PostGuard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 081D8423D67640B99A5A1688 /* Build configuration list for PBXNativeTarget "PostGuard" */;
+			buildPhases = (
+				B91A82CDB40A420DAA618C79 /* Sources */,
+				52DD44CA70264240A3331BC1 /* Resources */,
+				11E4DCE41F1D424C920F0575 /* Frameworks */,
+				5C3E883D2FD5509E00037D85 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5C3E883B2FD5509E00037D85 /* PBXTargetDependency */,
+			);
+			name = PostGuard;
+			packageProductDependencies = (
+				BB0000000000000000000011 /* FirebaseAuth */,
+				BB0000000000000000000012 /* FirebaseAILogic */,
+				BB0000000000000000000013 /* FirebaseFirestore */,
+				BB0000000000000000000014 /* FirebaseAppCheck */,
+				BB0000000000000000000015 /* GoogleSignIn */,
+				BB0000000000000000000016 /* GoogleSignInSwift */,
+			);
+			productName = PostGuard;
+			productReference = D8B63A938ED34E14B61783C3 /* PostGuard.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5C3E88342FD5509E00037D85 /* PostGuardKeyboard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5C3E88412FD5509E00037D85 /* Build configuration list for PBXNativeTarget "PostGuardKeyboard" */;
+			buildPhases = (
+				5C3E88312FD5509E00037D85 /* Sources */,
+				5C3E88322FD5509E00037D85 /* Frameworks */,
+				5C3E88332FD5509E00037D85 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				5C3E88362FD5509E00037D85 /* PostGuardKeyboard */,
+			);
+			name = PostGuardKeyboard;
+			packageProductDependencies = (
+				BB0000000000000000000021 /* FirebaseAILogic */,
+				BB0000000000000000000022 /* FirebaseAppCheck */,
+			);
+			productName = PostGuardKeyboard;
+			productReference = 5C3E88352FD5509E00037D85 /* PostGuardKeyboard.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		96E5DB33121C4C919AD504BF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2650;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					2FEB980669F447A6B3E87A94 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					5C3E88342FD5509E00037D85 = {
+						CreatedOnToolsVersion = 26.5;
+					};
+				};
+			};
+			buildConfigurationList = C3633CF74091426595FC210E /* Build configuration list for PBXProject "PostGuard" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = ja;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				ja,
+				Base,
+			);
+			mainGroup = 6ADF99C57F0D4EB7A6C45BAD /* PostGuard */;
+			packageReferences = (
+				BB0000000000000000000001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				BB0000000000000000000002 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+			);
+			productRefGroup = AED3B58A45FB4E968C401896 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2FEB980669F447A6B3E87A94 /* PostGuard */,
+				5C3E88342FD5509E00037D85 /* PostGuardKeyboard */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		52DD44CA70264240A3331BC1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB0000000000000000000052 /* Assets.xcassets in Resources */,
+				BB0000000000000000000054 /* PrivacyInfo.xcprivacy in Resources */,
+				BB0000000000000000000056 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C3E88332FD5509E00037D85 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5C3E88312FD5509E00037D85 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA00000000000000000000C1 /* AppGroup.swift in Sources */,
+				AA00000000000000000000C2 /* AnalysisRecord.swift in Sources */,
+				AA00000000000000000000C3 /* SharedStore.swift in Sources */,
+				AA00000000000000000000C7 /* AnalysisResult.swift in Sources */,
+				AA00000000000000000000C8 /* GeminiService.swift in Sources */,
+				AA00000000000000000000C9 /* DesignTokens.swift in Sources */,
+				BB000000000000000000005A /* FirebaseBootstrap.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B91A82CDB40A420DAA618C79 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CF1A4E1CE2E4AB5A53562A8 /* PostGuardApp.swift in Sources */,
+				60B1D10333F54739AED9A814 /* AnalysisResult.swift in Sources */,
+				14F1022F64D34AD5A3ADD583 /* GeminiService.swift in Sources */,
+				7E2D724E3DA744A9A42E8B5D /* DesignTokens.swift in Sources */,
+				74C96C06B82B476F87890F1B /* InputView.swift in Sources */,
+				164B7C3CD6D84489A54D9BE5 /* AnalysisView.swift in Sources */,
+				B15BA043C0D342B0936E338B /* RiskDimensionRow.swift in Sources */,
+				1A364CD1E96C46DEA01B0D03 /* SuggestionView.swift in Sources */,
+				74525696CAA94D549E31B21C /* SafeView.swift in Sources */,
+				1B72A3798D9749B4B8FC0F3F /* LoadingView.swift in Sources */,
+				AA00000000000000000000B1 /* AppGroup.swift in Sources */,
+				AA00000000000000000000B2 /* AnalysisRecord.swift in Sources */,
+				AA00000000000000000000B3 /* SharedStore.swift in Sources */,
+				AA00000000000000000000B4 /* AppRouter.swift in Sources */,
+				AA00000000000000000000B5 /* KeyboardSetupView.swift in Sources */,
+				AA00000000000000000000B6 /* HistoryView.swift in Sources */,
+				BB0000000000000000000059 /* FirebaseBootstrap.swift in Sources */,
+				BB0000000000000000000071 /* AuthService.swift in Sources */,
+				BB0000000000000000000072 /* UsageService.swift in Sources */,
+				BB0000000000000000000073 /* StoreService.swift in Sources */,
+				BB0000000000000000000074 /* LoginView.swift in Sources */,
+				BB0000000000000000000075 /* EmailAuthView.swift in Sources */,
+				BB0000000000000000000076 /* AppleSignInHelper.swift in Sources */,
+				BB0000000000000000000077 /* AccountView.swift in Sources */,
+				BB0000000000000000000078 /* PaywallView.swift in Sources */,
+				CC00000000000000000000B1 /* RootView.swift in Sources */,
+				CC00000000000000000000B2 /* PlanSelectionView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5C3E883B2FD5509E00037D85 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5C3E88342FD5509E00037D85 /* PostGuardKeyboard */;
+			targetProxy = 5C3E883A2FD5509E00037D85 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		3D9C1F53F04E4BB59D2C7244 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = PostGuard/PostGuard.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GFU3942D64;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PostGuard/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.postguard.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		5C3E883E2FD5509E00037D85 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = PostGuardKeyboard/PostGuardKeyboard.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = GFU3942D64;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PostGuardKeyboard/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PostGuardKeyboard;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.postguard.app.PostGuardKeyboard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5C3E883F2FD5509E00037D85 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = PostGuardKeyboard/PostGuardKeyboard.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = GFU3942D64;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PostGuardKeyboard/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PostGuardKeyboard;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.postguard.app.PostGuardKeyboard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		89334F61E40148F09F3528C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BCBA981BCB4C4E02AACF4115 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BCE25D9C60D942D09ABEDDD7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = PostGuard/PostGuard.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GFU3942D64;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PostGuard/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.postguard.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		081D8423D67640B99A5A1688 /* Build configuration list for PBXNativeTarget "PostGuard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BCE25D9C60D942D09ABEDDD7 /* Debug */,
+				3D9C1F53F04E4BB59D2C7244 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5C3E88412FD5509E00037D85 /* Build configuration list for PBXNativeTarget "PostGuardKeyboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C3E883E2FD5509E00037D85 /* Debug */,
+				5C3E883F2FD5509E00037D85 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C3633CF74091426595FC210E /* Build configuration list for PBXProject "PostGuard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				89334F61E40148F09F3528C2 /* Debug */,
+				BCBA981BCB4C4E02AACF4115 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BB0000000000000000000001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.14.0;
+			};
+		};
+		BB0000000000000000000002 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BB0000000000000000000011 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB0000000000000000000001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		BB0000000000000000000012 /* FirebaseAILogic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB0000000000000000000001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAILogic;
+		};
+		BB0000000000000000000013 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB0000000000000000000001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		BB0000000000000000000014 /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB0000000000000000000001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
+		};
+		BB0000000000000000000015 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB0000000000000000000002 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		BB0000000000000000000016 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB0000000000000000000002 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+		BB0000000000000000000021 /* FirebaseAILogic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB0000000000000000000001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAILogic;
+		};
+		BB0000000000000000000022 /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB0000000000000000000001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 96E5DB33121C4C919AD504BF /* Project object */;
+}

@@ -55,6 +55,7 @@
 		CC00000000000000000000B2 /* PlanSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC00000000000000000000F2 /* PlanSelectionView.swift */; };
 		DD00000000000000000000A1 /* UINavigationController+InteractivePop.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD00000000000000000000F1 /* UINavigationController+InteractivePop.swift */; };
 		DD00000000000000000000B1 /* PostGuardError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD00000000000000000000F2 /* PostGuardError.swift */; };
+		DD00000000000000000000C1 /* ConsentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD00000000000000000000F3 /* ConsentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +114,7 @@
 		CC00000000000000000000F2 /* PlanSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanSelectionView.swift; sourceTree = "<group>"; };
 		DD00000000000000000000F1 /* UINavigationController+InteractivePop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+InteractivePop.swift"; sourceTree = "<group>"; };
 		DD00000000000000000000F2 /* PostGuardError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostGuardError.swift"; sourceTree = "<group>"; };
+		DD00000000000000000000F3 /* ConsentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConsentView.swift"; sourceTree = "<group>"; };
 		D60B28462C02469AB3A82BB6 /* SafeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeView.swift; sourceTree = "<group>"; };
 		D8B63A938ED34E14B61783C3 /* PostGuard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PostGuard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1E5FDA219FD4E8CB6E6CB89 /* RiskDimensionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskDimensionRow.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				AA00000000000000000000F5 /* KeyboardSetupView.swift */,
+				DD00000000000000000000F3 /* ConsentView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -504,6 +507,7 @@
 				CC00000000000000000000B2 /* PlanSelectionView.swift in Sources */,
 				DD00000000000000000000A1 /* UINavigationController+InteractivePop.swift in Sources */,
 				DD00000000000000000000B1 /* PostGuardError.swift in Sources */,
+				DD00000000000000000000C1 /* ConsentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

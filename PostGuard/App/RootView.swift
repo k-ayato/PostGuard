@@ -10,11 +10,14 @@ struct RootView: View {
     @EnvironmentObject private var store: StoreService
     @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
     @AppStorage("hasSelectedPlan") private var hasSelectedPlan = false
+    @AppStorage("hasAgreedToTerms") private var hasAgreedToTerms = false
     @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
         Group {
-            if auth.isSignedIn {
+            if !hasAgreedToTerms {
+                ConsentView()
+            } else if auth.isSignedIn {
                 NavigationStack {
                     InputView()
                 }

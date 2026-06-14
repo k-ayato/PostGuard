@@ -1,32 +1,55 @@
 rules_version = '2';
 
-// PostGuard Firestore Security Rules
-// Firebaseコンソール > Firestore Database > ルール にデプロイしてください。
+// PostGuard Firestore Security Rules（= Supabase の RLS に相当）
+// Firebaseコンソール > Firestore Database > ルール に貼り付けて「公開」してください。
+// ※ このファイルはリポジトリ上の控えで、デプロイは手動です。
 //
-// users/{uid}: 使用量記録。本人のみ読み書き可。
-// usageCount は「月跨ぎリセット」または「単調増加」のみ許可し、
-// クライアントが回数を減らす改ざんを防ぐ。
+// users/{uid}: 使用量記録。保存するのは plan / usageMonth / usageCount のみで、
+// メール・氏名・投稿本文などの個人情報は一切保存しない。
+// - 読み書き・削除は本人(uid一致)のみ。他ユーザーのドキュメントには触れない。
+// - 書き込めるフィールドをホワイトリストで固定（任意フィールドの混入を防ぐ）。
+// - usageCount は「月替わりのリセット」または「同月内の増加」のみ許可。
+// - plan は 'free'/'pro' のみ（不正値を拒否）。createdAt は不変。
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /users/{uid} {
-      allow read, delete: if request.auth != null && request.auth.uid == uid;
 
-      allow create: if request.auth != null && request.auth.uid == uid
-        && request.resource.data.usageCount is int
-        && request.resource.data.usageCount >= 0
-        && request.resource.data.usageMonth is string;
-
-      allow update: if request.auth != null && request.auth.uid == uid
-        && request.resource.data.usageCount is int
-        && request.resource.data.usageCount >= 0
-        && (
-          // 月が変わった場合はリセットを許可
-          request.resource.data.usageMonth != resource.data.usageMonth
-          // 同月内は増加のみ許可
-          || request.resource.data.usageCount >= resource.data.usageCount
-        );
+    function isOwner(uid) {
+      return request.auth != null && request.auth.uid == uid;
     }
 
+    function allowedKeys() {
+      return request.resource.data.keys()
+        .hasOnly(['plan', 'usageMonth', 'usageCount', 'createdAt', 'updatedAt']);
+    }
+
+    function validFields() {
+      return (!('usageCount' in request.resource.data)
+                || (request.resource.data.usageCount is int
+                    && request.resource.data.usageCount >= 0))
+          && (!('usageMonth' in request.resource.data)
+                || request.resource.data.usageMonth is string)
+          && (!('plan' in request.resource.data)
+                || request.resource.data.plan in ['free', 'pro']);
+    }
+
+    match /users/{uid} {
+      allow read, delete: if isOwner(uid);
+
+      allow create: if isOwner(uid) && allowedKeys() && validFields();
+
+      allow update: if isOwner(uid) && allowedKeys() && validFields()
+        // createdAt は作成後変更不可
+        && (!('createdAt' in resource.data)
+              || request.resource.data.createdAt == resource.data.createdAt)
+        // 同月内は usageCount を減らせない（月替わり時のリセットのみ許可）
+        && (
+             request.resource.data.usageMonth != resource.data.usageMonth
+             || !('usageCount' in request.resource.data)
+             || request.resource.data.usageCount >= resource.data.usageCount
+           );
+    }
+
+    // 上記以外はすべて拒否
     match /{document=**} {
       allow read, write: if false;
     }

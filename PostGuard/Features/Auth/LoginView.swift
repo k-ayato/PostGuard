@@ -105,13 +105,13 @@ struct LoginView: View {
             case .success(let authorization):
                 guard let credential = authorization.credential as? ASAuthorizationAppleIDCredential,
                       let nonce = currentNonce else {
-                    errorMessage = AuthServiceError.missingToken.localizedDescription
+                    errorMessage = PostGuardError.display(AuthServiceError.missingToken)
                     return
                 }
                 run { try await auth.signInWithApple(credential: credential, rawNonce: nonce) }
             case .failure(let error):
                 if (error as? ASAuthorizationError)?.code != .canceled {
-                    errorMessage = error.localizedDescription
+                    errorMessage = PostGuardError.display(error)
                 }
             }
         }
@@ -172,7 +172,7 @@ struct LoginView: View {
             do {
                 try await operation()
             } catch {
-                errorMessage = error.localizedDescription
+                errorMessage = PostGuardError.display(error)
             }
         }
     }

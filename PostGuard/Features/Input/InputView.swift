@@ -7,10 +7,14 @@ struct InputView: View {
     @EnvironmentObject private var usage: UsageService
     @EnvironmentObject private var store: StoreService
     @State private var showQuotaPrompt = false
+    @FocusState private var isEditorFocused: Bool
 
     var body: some View {
         ZStack {
             Color.pgBackground.ignoresSafeArea()
+                // テキスト枠以外をタップしたらキーボードを閉じる（#2）
+                .contentShape(Rectangle())
+                .onTapGesture { isEditorFocused = false }
 
             // Ambient glow background
             GeometryReader { geo in
@@ -46,6 +50,8 @@ struct InputView: View {
                         Spacer(minLength: 120)
                     }
                 }
+                // スクロール開始でキーボードを閉じる（#2）
+                .scrollDismissesKeyboard(.immediately)
 
                 // Analyze button
                 analyzeButton
@@ -166,6 +172,7 @@ struct InputView: View {
                     .frame(minHeight: 160, maxHeight: 260)
                     .padding(12)
                     .scrollDismissesKeyboard(.interactively)
+                    .focused($isEditorFocused)
             }
         }
         .glassCard()
@@ -265,6 +272,8 @@ struct InputView: View {
 
     // ログインはRootViewのゲートで保証済み。残回数のみ確認する
     private func handleAnalyzeTap() {
+        // 分析開始時にキーボードを収納（#1）
+        isEditorFocused = false
         guard usage.canAnalyze(isPro: store.isPro) else {
             showQuotaPrompt = true
             return

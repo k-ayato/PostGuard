@@ -7,12 +7,17 @@ struct EmailAuthView: View {
     @State private var isRegistering = false
     @State private var email = ""
     @State private var password = ""
+    @State private var confirmPassword = ""
     @State private var isProcessing = false
     @State private var errorMessage: String?
     @State private var infoMessage: String?
 
     private var canSubmit: Bool {
-        email.contains("@") && password.count >= 6 && !isProcessing
+        guard email.contains("@"), password.count >= 6, !isProcessing else { return false }
+        if isRegistering {
+            return password == confirmPassword
+        }
+        return true
     }
 
     var body: some View {
@@ -44,6 +49,23 @@ struct EmailAuthView: View {
                         ) {
                             SecureField("", text: $password)
                                 .textContentType(isRegistering ? .newPassword : .password)
+                        }
+
+                        if isRegistering {
+                            inputField(
+                                label: "パスワード（確認）",
+                                placeholder: ""
+                            ) {
+                                SecureField("", text: $confirmPassword)
+                                    .textContentType(.newPassword)
+                            }
+
+                            if !confirmPassword.isEmpty, password != confirmPassword {
+                                Text("パスワードが一致しません。")
+                                    .font(.system(size: 12))
+                                    .foregroundColor(.pgWarning)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            }
                         }
                     }
 
@@ -83,6 +105,7 @@ struct EmailAuthView: View {
 
                     Button {
                         isRegistering.toggle()
+                        confirmPassword = ""
                         errorMessage = nil
                         infoMessage = nil
                     } label: {
@@ -147,7 +170,7 @@ struct EmailAuthView: View {
                     try await auth.signIn(email: email, password: password)
                 }
             } catch {
-                errorMessage = error.localizedDescription
+                errorMessage = PostGuardError.display(error)
             }
         }
     }
@@ -163,7 +186,7 @@ struct EmailAuthView: View {
                 try await auth.sendPasswordReset(email: email)
                 infoMessage = "パスワード再設定メールを送信しました。"
             } catch {
-                errorMessage = error.localizedDescription
+                errorMessage = PostGuardError.display(error)
             }
         }
     }

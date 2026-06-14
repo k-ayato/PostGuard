@@ -76,18 +76,67 @@ final class KeyboardViewController: UIInputViewController {
     }
 
     // Keyboard extensions cannot use extensionContext.open(); walking the
-    // responder chain to UIApplication's openURL: is the known workaround.
+    // responder chain to UIApplication and invoking its open URL method is the
+    // known workaround. iOS 18 logs a "needs to migrate to the non-deprecated
+    // UIApplication.open(_:options:completionHandler:)" warning for the legacy
+    // openURL: selector and can fail to actually open the app, so we prefer the
+    // non-deprecated selector and only fall back to openURL: when unavailable.
     @discardableResult
     func openMainApp(host: String) -> Bool {
         guard let url = URL(string: "postguard://\(host)") else { return false }
-        let selector = NSSelectorFromString("openURL:")
+
+        // 1. Try to resolve the UIApplication via the responder chain's
+        //    `application` accessor, then drive it directly. This is the most
+        //    reliable target since UIApplication implements both open methods.
+        if let application = responderChainApplication() {
+            if open(url, on: application) { return true }
+        }
+
+        // 2. Fall back to invoking the open selectors on whichever responder in
+        //    the chain implements them (the classic workaround).
         var responder: UIResponder? = self
         while let current = responder {
-            if current.responds(to: selector), !(current is UIInputViewController) {
-                current.perform(selector, with: url)
+            if !(current is UIInputViewController), open(url, on: current) {
                 return true
             }
             responder = current.next
+        }
+        return false
+    }
+
+    // Walks the responder chain looking for an object that exposes a UIApplication
+    // through the `application` selector (UIApplication itself returns `self`).
+    private func responderChainApplication() -> NSObject? {
+        let applicationSelector = NSSelectorFromString("application")
+        var responder: UIResponder? = self
+        while let current = responder {
+            if !(current is UIInputViewController),
+               current.responds(to: applicationSelector),
+               let application = current.perform(applicationSelector)?.takeUnretainedValue() as? NSObject {
+                return application
+            }
+            responder = current.next
+        }
+        return nil
+    }
+
+    // Attempts to open `url` on `target`, preferring the non-deprecated
+    // open(_:options:completionHandler:) selector over the deprecated openURL:.
+    private func open(_ url: URL, on target: NSObject) -> Bool {
+        let modernSelector = NSSelectorFromString("openURL:options:completionHandler:")
+        if target.responds(to: modernSelector) {
+            typealias OpenURLOptions = @convention(c)
+                (NSObject, Selector, URL, [AnyHashable: Any], Any?) -> Void
+            let method = target.method(for: modernSelector)
+            let openURL = unsafeBitCast(method, to: OpenURLOptions.self)
+            openURL(target, modernSelector, url, [:], nil)
+            return true
+        }
+
+        let legacySelector = NSSelectorFromString("openURL:")
+        if target.responds(to: legacySelector) {
+            target.perform(legacySelector, with: url)
+            return true
         }
         return false
     }

@@ -104,8 +104,10 @@ final class KeyboardViewModel: ObservableObject {
 
     func openDetail() {
         guard case .result(let record) = phase, let controller else { return }
+        // analyze() で appendHistory 済みのため、自動起動に失敗しても結果は
+        // 本体アプリの履歴から確認できる。その導線をフォールバックとして案内する。
         if !controller.openMainApp(record: record) {
-            phase = .error("自動で開けませんでした。PostGuardアプリを起動すると詳細が表示されます。")
+            phase = .error("アプリを自動で開けませんでした。PostGuardアプリを開き、履歴から結果をご確認ください。")
         }
     }
 

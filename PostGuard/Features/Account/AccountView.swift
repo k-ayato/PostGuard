@@ -16,9 +16,9 @@ struct AccountView: View {
     @State private var isProcessing = false
     @State private var errorMessage: String?
 
-    // GitHub Pages（リポジトリ名 Post_Guard）でホスティング
-    static let privacyPolicyURL = URL(string: "https://k-ayato.github.io/Post_Guard/privacy.html")!
-    static let termsURL = URL(string: "https://k-ayato.github.io/Post_Guard/terms.html")!
+    // GitHub Pages（リポジトリ PostGuard）でホスティング
+    static let privacyPolicyURL = URL(string: "https://k-ayato.github.io/PostGuard/privacy.html")!
+    static let termsURL = URL(string: "https://k-ayato.github.io/PostGuard/terms.html")!
 
     var body: some View {
         NavigationStack {

@@ -17,8 +17,8 @@ struct AccountView: View {
     @State private var errorMessage: String?
 
     // TODO: リリース前に実際のホスティングURLへ差し替え
-    static let privacyPolicyURL = URL(string: "https://k-ayato.github.io/postguard/privacy")!
-    static let termsURL = URL(string: "https://k-ayato.github.io/postguard/terms")!
+    static let privacyPolicyURL = URL(string: "https://k-ayato.github.io/PostGuard/privacy.html")!
+    static let termsURL = URL(string: "https://k-ayato.github.io/PostGuard/terms.html")!
 
     var body: some View {
         NavigationStack {
@@ -29,7 +29,9 @@ struct AccountView: View {
                     VStack(spacing: 16) {
                         profileCard
                         planCard
-                        menuCard
+                        if FeatureFlags.paidPlansEnabled {
+                            menuCard
+                        }
                         legalCard
                         signOutButton
                         deleteButton
@@ -144,7 +146,7 @@ struct AccountView: View {
                 }
             }
 
-            if !store.isPro {
+            if !store.isPro, FeatureFlags.paidPlansEnabled {
                 Button {
                     openPlanSelection()
                 } label: {
@@ -164,12 +166,14 @@ struct AccountView: View {
                 }
             }
 
-            Button {
-                Task { await store.restore() }
-            } label: {
-                Text("購入を復元")
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundColor(.pgTextSecondary)
+            if FeatureFlags.paidPlansEnabled {
+                Button {
+                    Task { await store.restore() }
+                } label: {
+                    Text("購入を復元")
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundColor(.pgTextSecondary)
+                }
             }
         }
         .padding(16)
@@ -207,11 +211,15 @@ struct AccountView: View {
 
     private var legalCard: some View {
         VStack(spacing: 0) {
-            Link(destination: Self.termsURL) {
+            NavigationLink {
+                LegalDocumentView(kind: .terms)
+            } label: {
                 legalRow(title: "利用規約")
             }
             Divider().background(Color.pgBorder)
-            Link(destination: Self.privacyPolicyURL) {
+            NavigationLink {
+                LegalDocumentView(kind: .privacy)
+            } label: {
                 legalRow(title: "プライバシーポリシー")
             }
         }

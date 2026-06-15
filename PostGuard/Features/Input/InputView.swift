@@ -87,10 +87,14 @@ struct InputView: View {
             }
         }
         .alert("無料枠を使い切りました", isPresented: $showQuotaPrompt) {
-            Button("プランを見る") { router.showPlanSelection = true }
+            if FeatureFlags.paidPlansEnabled {
+                Button("プランを見る") { router.showPlanSelection = true }
+            }
             Button("閉じる", role: .cancel) {}
         } message: {
-            Text("今月の無料分析回数（\(SharedStore.freeMonthlyLimit)回）をすべて使用しました。プランをアップグレードすると無制限で分析できます。")
+            Text(FeatureFlags.paidPlansEnabled
+                ? "今月の無料分析回数（\(SharedStore.freeMonthlyLimit)回）をすべて使用しました。プランをアップグレードすると無制限で分析できます。"
+                : "今月の無料分析回数（\(SharedStore.freeMonthlyLimit)回）をすべて使用しました。毎月1日にリセットされます。")
         }
     }
 

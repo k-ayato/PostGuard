@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ConsentView: View {
     @AppStorage("hasAgreedToTerms") private var hasAgreedToTerms = false
+    @State private var presentedDoc: LegalDocumentView.Kind?
 
     var body: some View {
         ZStack {
@@ -36,6 +37,11 @@ struct ConsentView: View {
             }
         }
         .preferredColorScheme(.dark)
+        .sheet(item: $presentedDoc) { doc in
+            NavigationStack {
+                LegalDocumentView(kind: doc)
+            }
+        }
     }
 
     private var header: some View {
@@ -84,11 +90,11 @@ struct ConsentView: View {
 
     private var legalCard: some View {
         VStack(spacing: 0) {
-            Link(destination: AccountView.termsURL) {
+            Button { presentedDoc = .terms } label: {
                 legalRow(title: "利用規約")
             }
             Divider().background(Color.pgBorder)
-            Link(destination: AccountView.privacyPolicyURL) {
+            Button { presentedDoc = .privacy } label: {
                 legalRow(title: "プライバシーポリシー")
             }
         }

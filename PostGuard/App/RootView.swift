@@ -80,7 +80,8 @@ struct RootView: View {
     // ログイン直後（または既ログインでの初回起動時）のフロー:
     // プラン未選択ならプラン選択 → 初回はキーボード設定ガイド
     private func presentPostSignInFlowIfNeeded() {
-        if !hasSelectedPlan {
+        // v1は有料プラン非表示のためプラン選択をスキップ。フラグ解放時のみ表示。
+        if FeatureFlags.paidPlansEnabled, !hasSelectedPlan {
             router.showPlanSelection = true
         } else if !hasSeenOnboarding {
             hasSeenOnboarding = true

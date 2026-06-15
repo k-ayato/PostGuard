@@ -66,14 +66,23 @@ struct KeyboardRootView: View {
                 viewModel.openAppForSignIn()
             }
         case .quotaExceeded:
-            actionMessageView(
-                icon: "gauge.with.needle",
-                iconColor: .pgWarning,
-                title: "今月の無料分析回数を使い切りました",
-                message: "プランをアップグレードすると無制限で分析できます。",
-                buttonTitle: "プランを変更"
-            ) {
-                viewModel.openAppForPaywall()
+            if FeatureFlags.paidPlansEnabled {
+                actionMessageView(
+                    icon: "gauge.with.needle",
+                    iconColor: .pgWarning,
+                    title: "今月の無料分析回数を使い切りました",
+                    message: "プランをアップグレードすると無制限で分析できます。",
+                    buttonTitle: "プランを変更"
+                ) {
+                    viewModel.openAppForPaywall()
+                }
+            } else {
+                messageView(
+                    icon: "gauge.with.needle",
+                    iconColor: .pgWarning,
+                    title: "今月の無料分析回数を使い切りました",
+                    message: "毎月1日にリセットされます。"
+                )
             }
         case .empty:
             messageView(

@@ -191,16 +191,31 @@ struct AnalysisView: View {
                 }
             }
 
-            if let url = result.factCheck.sourceUrl {
-                HStack(spacing: 5) {
-                    Image(systemName: "link")
-                        .font(.system(size: 10))
-                    Text(url)
-                        .font(.system(size: 11))
-                        .lineLimit(1)
-                        .truncationMode(.middle)
+            // 出典: タップで既定ブラウザに遷移（Linkはユーザーの既定ブラウザでURLを開く）。
+            // 未確認(unconfirmed)の場合は出典欄を控えめに表示する。
+            if let urlString = result.factCheck.sourceUrl,
+               let url = URL(string: urlString) {
+                let isUnconfirmed = result.factCheck.result == "unconfirmed"
+                Link(destination: url) {
+                    HStack(spacing: 5) {
+                        Image(systemName: "link")
+                            .font(.system(size: 10))
+                        Text("出典")
+                            .font(.system(size: 11, weight: .semibold))
+                        Text(urlString)
+                            .font(.system(size: 11))
+                            .lineLimit(1)
+                            .truncationMode(.middle)
+                        Image(systemName: "arrow.up.right")
+                            .font(.system(size: 9))
+                    }
+                    .foregroundColor(isUnconfirmed ? .pgTextTertiary : .pgAccent.opacity(0.9))
                 }
-                .foregroundColor(.pgAccent.opacity(0.8))
+            } else if result.factCheck.result == "unconfirmed" {
+                // 出典が得られなかった場合は控えめに
+                Text("出典は確認できませんでした")
+                    .font(.system(size: 11))
+                    .foregroundColor(.pgTextTertiary)
             }
         }
         .padding(18)

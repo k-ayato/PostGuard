@@ -33,7 +33,7 @@ struct LegalDocumentView: View {
 }
 
 enum LegalText {
-    static let contactEmail = "support.postguard@gmail.com"
+    static let contactEmail = "kenmei.26.ayato@gmail.com"
     static let operatorName = "綾戸健明"
     static let effectiveDate = "2026年6月15日"
 

@@ -10,7 +10,7 @@ struct EmailAuthView: View {
     @State private var confirmPassword = ""
     @State private var isProcessing = false
     @State private var errorMessage: String?
-    @State private var infoMessage: String?
+    @State private var showPasswordReset = false
 
     private var canSubmit: Bool {
         guard email.contains("@"), password.count >= 6, !isProcessing else { return false }
@@ -75,12 +75,6 @@ struct EmailAuthView: View {
                             .foregroundColor(.pgWarning)
                             .multilineTextAlignment(.center)
                     }
-                    if let infoMessage {
-                        Text(infoMessage)
-                            .font(.system(size: 12))
-                            .foregroundColor(.pgSafe)
-                            .multilineTextAlignment(.center)
-                    }
 
                     Button {
                         submit()
@@ -107,7 +101,6 @@ struct EmailAuthView: View {
                         isRegistering.toggle()
                         confirmPassword = ""
                         errorMessage = nil
-                        infoMessage = nil
                     } label: {
                         Text(isRegistering ? "アカウントをお持ちの方はログイン" : "アカウントをお持ちでない方は登録")
                             .font(.system(size: 13, weight: .medium))
@@ -115,12 +108,17 @@ struct EmailAuthView: View {
                     }
 
                     if !isRegistering {
-                        Button {
-                            sendReset()
-                        } label: {
-                            Text("パスワードをお忘れですか？")
-                                .font(.system(size: 12))
-                                .foregroundColor(.pgTextSecondary)
+                        VStack(spacing: 4) {
+                            Button {
+                                showPasswordReset = true
+                            } label: {
+                                Text("パスワードをお忘れですか？")
+                                    .font(.system(size: 12))
+                                    .foregroundColor(.pgTextSecondary)
+                            }
+                            Text("メールアドレスを入力して再設定リンクを受け取れます。")
+                                .font(.system(size: 11))
+                                .foregroundColor(.pgTextTertiary)
                         }
                     }
                 }
@@ -128,6 +126,9 @@ struct EmailAuthView: View {
             }
         }
         .preferredColorScheme(.dark)
+        .navigationDestination(isPresented: $showPasswordReset) {
+            PasswordResetView(initialEmail: email)
+        }
         .onChange(of: auth.isSignedIn) { _, signedIn in
             if signedIn { dismiss() }
         }
@@ -159,7 +160,6 @@ struct EmailAuthView: View {
 
     private func submit() {
         errorMessage = nil
-        infoMessage = nil
         isProcessing = true
         Task {
             defer { isProcessing = false }
@@ -169,22 +169,6 @@ struct EmailAuthView: View {
                 } else {
                     try await auth.signIn(email: email, password: password)
                 }
-            } catch {
-                errorMessage = PostGuardError.display(error)
-            }
-        }
-    }
-
-    private func sendReset() {
-        guard email.contains("@") else {
-            errorMessage = "メールアドレスを入力してください。"
-            return
-        }
-        errorMessage = nil
-        Task {
-            do {
-                try await auth.sendPasswordReset(email: email)
-                infoMessage = "パスワード再設定メールを送信しました。"
             } catch {
                 errorMessage = PostGuardError.display(error)
             }

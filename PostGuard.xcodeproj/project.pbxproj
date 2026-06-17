@@ -49,6 +49,7 @@
 		BB0000000000000000000074 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000064 /* LoginView.swift */; };
 		BB0000000000000000000075 /* EmailAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000065 /* EmailAuthView.swift */; };
 		BB0000000000000000000076 /* AppleSignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000066 /* AppleSignInHelper.swift */; };
+		BB0000000000000000000091 /* PasswordResetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000090 /* PasswordResetView.swift */; };
 		BB0000000000000000000077 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000067 /* AccountView.swift */; };
 		BB0000000000000000000078 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0000000000000000000068 /* PaywallView.swift */; };
 		CC00000000000000000000B1 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC00000000000000000000F1 /* RootView.swift */; };
@@ -110,6 +111,7 @@
 		BB0000000000000000000064 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BB0000000000000000000065 /* EmailAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAuthView.swift; sourceTree = "<group>"; };
 		BB0000000000000000000066 /* AppleSignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInHelper.swift; sourceTree = "<group>"; };
+		BB0000000000000000000090 /* PasswordResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetView.swift; sourceTree = "<group>"; };
 		BB0000000000000000000067 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		BB0000000000000000000068 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
 		C4A2275949F94F6A9D619906 /* AnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisView.swift; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 			children = (
 				BB0000000000000000000064 /* LoginView.swift */,
 				BB0000000000000000000065 /* EmailAuthView.swift */,
+				BB0000000000000000000090 /* PasswordResetView.swift */,
 				BB0000000000000000000066 /* AppleSignInHelper.swift */,
 			);
 			path = Auth;
@@ -510,6 +513,7 @@
 				BB0000000000000000000073 /* StoreService.swift in Sources */,
 				BB0000000000000000000074 /* LoginView.swift in Sources */,
 				BB0000000000000000000075 /* EmailAuthView.swift in Sources */,
+				BB0000000000000000000091 /* PasswordResetView.swift in Sources */,
 				BB0000000000000000000076 /* AppleSignInHelper.swift in Sources */,
 				BB0000000000000000000077 /* AccountView.swift in Sources */,
 				BB0000000000000000000078 /* PaywallView.swift in Sources */,

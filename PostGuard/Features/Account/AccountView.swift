@@ -15,6 +15,7 @@ struct AccountView: View {
     @State private var deleteNonce: String?
     @State private var isProcessing = false
     @State private var errorMessage: String?
+    @State private var resetInfoMessage: String?
 
     // GitHub Pages（リポジトリ PostGuard）でホスティング
     static let privacyPolicyURL = URL(string: "https://k-ayato.github.io/PostGuard/privacy.html")!
@@ -73,14 +74,12 @@ struct AccountView: View {
         } message: {
             Text("分析履歴・使用状況などすべてのデータが削除されます。この操作は取り消せません。")
         }
-        .alert("本人確認", isPresented: $showPasswordPrompt) {
-            SecureField("パスワード", text: $deletePassword)
-            Button("削除する", role: .destructive) {
-                runDeletion { try await auth.deleteAccount(password: deletePassword) }
-            }
-            Button("キャンセル", role: .cancel) { deletePassword = "" }
-        } message: {
-            Text("アカウント削除のため、パスワードを入力してください。")
+        .sheet(isPresented: $showPasswordPrompt, onDismiss: {
+            deletePassword = ""
+            resetInfoMessage = nil
+        }) {
+            emailReauthSheet
+                .presentationDetents([.height(360)])
         }
         .sheet(isPresented: $showAppleReauth) {
             appleReauthSheet
@@ -290,6 +289,86 @@ struct AccountView: View {
         } else {
             // Google: re-auth flow is presented by the SDK itself.
             runDeletion { try await auth.deleteAccount() }
+        }
+    }
+
+    // メールアカウントの削除前再認証。パスワードを忘れた場合に備え、ログイン中の
+    // 本人メール宛へ再設定リンクを送る導線を同居させる（メール入力不要・本人確定済み
+    // のため account enumeration の懸念なし）。
+    private var emailReauthSheet: some View {
+        VStack(spacing: 16) {
+            Text("本人確認")
+                .font(.system(size: 17, weight: .bold))
+                .foregroundColor(.pgTextPrimary)
+            Text("アカウント削除のため、パスワードを入力してください。")
+                .font(.system(size: 13))
+                .foregroundColor(.pgTextSecondary)
+                .multilineTextAlignment(.center)
+
+            SecureField("パスワード", text: $deletePassword)
+                .textContentType(.password)
+                .font(.system(size: 16))
+                .foregroundColor(.pgTextPrimary)
+                .padding(14)
+                .background(
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color.pgBackground)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color.pgBorder, lineWidth: 1)
+                        )
+                )
+
+            Button {
+                showPasswordPrompt = false
+                runDeletion { try await auth.deleteAccount(password: deletePassword) }
+            } label: {
+                Text("削除する")
+                    .font(.system(size: 15, weight: .bold))
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 48)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(deletePassword.isEmpty ? Color.pgSurface : Color.pgWarning)
+                    )
+            }
+            .disabled(deletePassword.isEmpty)
+
+            Button {
+                sendDeletionPasswordReset()
+            } label: {
+                Text("パスワードをお忘れですか？（再設定メールを送信）")
+                    .font(.system(size: 12))
+                    .foregroundColor(.pgAccent)
+            }
+
+            if let resetInfoMessage {
+                Text(resetInfoMessage)
+                    .font(.system(size: 12))
+                    .foregroundColor(.pgSafe)
+                    .multilineTextAlignment(.center)
+            }
+        }
+        .padding(24)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.pgSurface)
+        .preferredColorScheme(.dark)
+    }
+
+    private func sendDeletionPasswordReset() {
+        guard let email = auth.user?.email else {
+            resetInfoMessage = "メールアドレスを取得できませんでした。"
+            return
+        }
+        resetInfoMessage = nil
+        Task {
+            do {
+                try await auth.sendPasswordReset(email: email)
+                resetInfoMessage = "再設定メールを送信しました。メールのリンクから新しいパスワードに変更後、もう一度お試しください。"
+            } catch {
+                resetInfoMessage = PostGuardError.display(error)
+            }
         }
     }
 

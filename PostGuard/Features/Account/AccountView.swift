@@ -29,8 +29,10 @@ struct AccountView: View {
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 16) {
                         profileCard
-                        planCard
+                        // 無料のみのバージョンでは「プラン」カードを出さない（有料の存在を
+                        // 誤認させないため）。有料プラン解放時のみプラン/メニューを表示。
                         if FeatureFlags.paidPlansEnabled {
+                            planCard
                             menuCard
                         }
                         legalCard
@@ -130,7 +132,7 @@ struct AccountView: View {
     private var planCard: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                Text("ご利用状況")
+                Text("プラン")
                     .font(.system(size: 11, weight: .semibold))
                     .foregroundColor(.pgTextSecondary)
                 Spacer()
@@ -140,7 +142,7 @@ struct AccountView: View {
                 Image(systemName: store.isPro ? "crown.fill" : "person")
                     .font(.system(size: 16))
                     .foregroundColor(store.isPro ? .pgCaution : .pgTextSecondary)
-                Text(store.isPro ? "PostGuard Pro" : "無料で利用中")
+                Text(store.isPro ? "PostGuard Pro" : "無料プラン")
                     .font(.system(size: 17, weight: .bold))
                     .foregroundColor(.pgTextPrimary)
                 Spacer()

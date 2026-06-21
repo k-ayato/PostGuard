@@ -5,7 +5,7 @@ import UIKit
 @MainActor
 final class KeyboardViewModel: ObservableObject {
     enum Phase {
-        case needsFullAccess
+        case offline(text: String, warnings: [LocalRiskChecker.Warning])
         case needsSignIn
         case quotaExceeded
         case empty
@@ -32,8 +32,14 @@ final class KeyboardViewModel: ObservableObject {
                 break
             }
         }
+        // フルアクセスOFFではネットワーク/App Groupが使えないため、端末内で完結する
+        // 簡易リスクチェックを提供する（App Store審査 4.4.1 対応）。
         guard controller.fullAccessGranted else {
-            phase = .needsFullAccess
+            controller.setKeyboardHeight(300)
+            Task {
+                let text = await controller.capturedText()
+                phase = .offline(text: text, warnings: LocalRiskChecker.check(text))
+            }
             return
         }
         // ログイン状態・Pro状態は本体アプリがApp Groupへ書き込んだキャッシュを参照する

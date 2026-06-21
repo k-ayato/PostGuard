@@ -79,7 +79,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				5C3E883C2FD5509E00037D85 /* PostGuardKeyboard.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -368,7 +367,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				5C3E883B2FD5509E00037D85 /* PBXTargetDependency */,
 			);
 			name = PostGuard;
 			packageProductDependencies = (

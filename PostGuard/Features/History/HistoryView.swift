@@ -150,7 +150,7 @@ struct HistoryView: View {
             Text("履歴はまだありません")
                 .font(.system(size: 15, weight: .semibold))
                 .foregroundColor(.pgTextSecondary)
-            Text("アプリまたはキーボードで分析すると\nここに記録されます。")
+            Text("アプリで分析すると\nここに記録されます。")
                 .font(.system(size: 12))
                 .foregroundColor(.pgTextTertiary)
                 .multilineTextAlignment(.center)

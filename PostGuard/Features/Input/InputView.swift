@@ -120,9 +120,6 @@ struct InputView: View {
             headerIconButton(systemName: "clock.arrow.circlepath") {
                 router.showHistory = true
             }
-            headerIconButton(systemName: "keyboard") {
-                router.showKeyboardSetup = true
-            }
             headerIconButton(systemName: store.isPro ? "person.crop.circle.badge.checkmark" : "person.crop.circle") {
                 router.showAccount = true
             }

@@ -129,8 +129,10 @@ struct EmailAuthView: View {
         .navigationDestination(isPresented: $showPasswordReset) {
             PasswordResetView(initialEmail: email)
         }
-        .onChange(of: auth.isSignedIn) { _, signedIn in
-            if signedIn { dismiss() }
+        // 匿名→本会員（連携/サインイン）が完了したら閉じる。匿名認証では isSignedIn は
+        // 常に true のため、本会員化＝isAnonymous が false になった時点で判定する。
+        .onChange(of: auth.isAnonymous) { _, anon in
+            if !anon { dismiss() }
         }
     }
 

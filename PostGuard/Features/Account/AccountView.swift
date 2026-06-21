@@ -34,7 +34,11 @@ struct AccountView: View {
                             menuCard
                         }
                         legalCard
-                        signOutButton
+                        if auth.isAnonymous {
+                            linkAccountButton
+                        } else {
+                            signOutButton
+                        }
                         deleteButton
 
                         if let errorMessage {
@@ -65,7 +69,7 @@ struct AccountView: View {
         }
         .preferredColorScheme(.dark)
         .confirmationDialog(
-            "アカウントを削除しますか？",
+            deleteTitle,
             isPresented: $showDeleteConfirm,
             titleVisibility: .visible
         ) {
@@ -107,7 +111,9 @@ struct AccountView: View {
                 .font(.system(size: 40))
                 .foregroundColor(.pgAccent)
             VStack(alignment: .leading, spacing: 4) {
-                Text(auth.user?.email ?? auth.user?.displayName ?? "ログイン中")
+                Text(auth.isAnonymous
+                     ? "ゲストとして利用中"
+                     : (auth.user?.email ?? auth.user?.displayName ?? "ログイン中"))
                     .font(.system(size: 15, weight: .semibold))
                     .foregroundColor(.pgTextPrimary)
                     .lineLimit(1)
@@ -124,7 +130,7 @@ struct AccountView: View {
     private var planCard: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                Text("プラン")
+                Text("ご利用状況")
                     .font(.system(size: 11, weight: .semibold))
                     .foregroundColor(.pgTextSecondary)
                 Spacer()
@@ -134,7 +140,7 @@ struct AccountView: View {
                 Image(systemName: store.isPro ? "crown.fill" : "person")
                     .font(.system(size: 16))
                     .foregroundColor(store.isPro ? .pgCaution : .pgTextSecondary)
-                Text(store.isPro ? "PostGuard Pro" : "無料プラン")
+                Text(store.isPro ? "PostGuard Pro" : "無料で利用中")
                     .font(.system(size: 17, weight: .bold))
                     .foregroundColor(.pgTextPrimary)
                 Spacer()
@@ -238,6 +244,31 @@ struct AccountView: View {
         .padding(16)
     }
 
+    // 匿名（ゲスト）ユーザー向け：任意のアカウント連携導線。
+    private var linkAccountButton: some View {
+        Button {
+            openLogin()
+        } label: {
+            HStack(spacing: 8) {
+                Image(systemName: "person.crop.circle.badge.plus")
+                    .font(.system(size: 16))
+                Text("ログイン / アカウント連携")
+                    .font(.system(size: 15, weight: .bold))
+            }
+            .foregroundColor(.white)
+            .frame(maxWidth: .infinity)
+            .frame(height: 50)
+            .background(
+                LinearGradient(
+                    colors: [Color.pgAccent, Color(hex: "#9B5CFF")],
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+            )
+            .clipShape(RoundedRectangle(cornerRadius: 14))
+        }
+    }
+
     private var signOutButton: some View {
         Button {
             do {
@@ -262,7 +293,7 @@ struct AccountView: View {
         Button {
             showDeleteConfirm = true
         } label: {
-            Text("アカウントを削除")
+            Text(auth.isAnonymous ? "データを削除" : "アカウントを削除")
                 .font(.system(size: 13, weight: .medium))
                 .foregroundColor(.pgWarning)
         }
@@ -272,11 +303,24 @@ struct AccountView: View {
     // MARK: - Deletion flows
 
     private var providerLabel: String {
+        if auth.isAnonymous { return "アカウント未連携（連携すると引き継ぎ可能）" }
         switch auth.primaryProviderID {
         case "apple.com": return "Appleでログイン中"
         case "google.com": return "Googleでログイン中"
         case "password": return "メールアドレスでログイン中"
         default: return "ログイン中"
+        }
+    }
+
+    private var deleteTitle: String {
+        auth.isAnonymous ? "データを削除しますか？" : "アカウントを削除しますか？"
+    }
+
+    private func openLogin() {
+        dismiss()
+        // sheetのdismiss完了後にログインsheetを出す（同時表示の衝突回避）
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            router.showLogin = true
         }
     }
 

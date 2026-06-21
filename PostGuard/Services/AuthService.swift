@@ -38,6 +38,22 @@ final class AuthService: ObservableObject {
 
     var isSignedIn: Bool { user != nil }
 
+    // 匿名（ゲスト）ログイン中かどうか。本会員（Apple/Google/メール連携済み）と
+    // 区別して、ログイン導線や退会導線の出し分けに使う。
+    var isAnonymous: Bool { user?.isAnonymous ?? false }
+
+    // App Store審査 5.1.1(v) 対応: アカウント登録なしでコア機能（分析）を使える
+    // よう、未ログイン時は匿名認証でゲスト uid を発行する。利用規約同意後にのみ
+    // 呼ぶこと（同意前にユーザーを作らない）。失敗は致命的でないためログのみ。
+    func signInAnonymouslyIfNeeded() async {
+        guard FirebaseBootstrap.isConfigured, Auth.auth().currentUser == nil else { return }
+        do {
+            try await Auth.auth().signInAnonymously()
+        } catch {
+            print("[AuthService] anonymous sign-in failed: \(error)")
+        }
+    }
+
     // Safe to call repeatedly; attaches the listener once Firebase is configured.
     func start() {
         guard listener == nil, FirebaseBootstrap.isConfigured else { return }
@@ -72,6 +88,23 @@ final class AuthService: ObservableObject {
             withIDToken: idToken,
             accessToken: result.user.accessToken.tokenString
         )
+        try await linkOrSignIn(with: credential)
+    }
+
+    // 匿名ユーザーなら credential をリンクして本会員へ昇格し、ゲスト時の uid と
+    // 使用回数を引き継ぐ。その credential が既に別アカウントで使われている場合は、
+    // そのアカウントへサインインする（リンクは諦める）。匿名でなければ通常サインイン。
+    private func linkOrSignIn(with credential: AuthCredential) async throws {
+        if let current = Auth.auth().currentUser, current.isAnonymous {
+            do {
+                try await current.link(with: credential)
+                return
+            } catch let error as NSError where error.code == AuthErrorCode.credentialAlreadyInUse.rawValue {
+                let updated = error.userInfo[AuthErrorUserInfoUpdatedCredentialKey] as? AuthCredential
+                try await Auth.auth().signIn(with: updated ?? credential)
+                return
+            }
+        }
         try await Auth.auth().signIn(with: credential)
     }
 
@@ -80,7 +113,7 @@ final class AuthService: ObservableObject {
     func signInWithApple(credential: ASAuthorizationAppleIDCredential, rawNonce: String) async throws {
         guard FirebaseBootstrap.isConfigured else { throw AuthServiceError.notConfigured }
         let firebaseCredential = try Self.firebaseCredential(from: credential, rawNonce: rawNonce)
-        try await Auth.auth().signIn(with: firebaseCredential)
+        try await linkOrSignIn(with: firebaseCredential)
     }
 
     private static func firebaseCredential(
@@ -102,7 +135,13 @@ final class AuthService: ObservableObject {
 
     func signUp(email: String, password: String) async throws {
         guard FirebaseBootstrap.isConfigured else { throw AuthServiceError.notConfigured }
-        try await Auth.auth().createUser(withEmail: email, password: password)
+        // 匿名ユーザーならメール資格情報をリンクしてゲストのまま本会員化（uid維持）。
+        if let current = Auth.auth().currentUser, current.isAnonymous {
+            let credential = EmailAuthProvider.credential(withEmail: email, password: password)
+            try await current.link(with: credential)
+        } else {
+            try await Auth.auth().createUser(withEmail: email, password: password)
+        }
     }
 
     func signIn(email: String, password: String) async throws {

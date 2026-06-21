@@ -6,6 +6,7 @@ import SwiftUI
 // 状態変化をRootViewが検知してホームへ切り替える。
 struct LoginView: View {
     @EnvironmentObject private var auth: AuthService
+    @Environment(\.dismiss) private var dismiss
 
     @State private var currentNonce: String?
     @State private var showEmailAuth = false
@@ -55,7 +56,7 @@ struct LoginView: View {
                             .padding(.top, 12)
                     }
 
-                    Text("ログインすると分析機能が利用できます。\n無料プランでは月\(SharedStore.freeMonthlyLimit)回まで分析できます。")
+                    Text("連携は任意です。連携しなくても分析機能はご利用いただけます。\n月\(SharedStore.freeMonthlyLimit)回まで無料で分析できます。")
                         .font(.system(size: 12))
                         .foregroundColor(.pgTextTertiary)
                         .multilineTextAlignment(.center)
@@ -75,6 +76,21 @@ struct LoginView: View {
             .navigationDestination(isPresented: $showEmailAuth) {
                 EmailAuthView()
             }
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "xmark")
+                            .font(.system(size: 13, weight: .bold))
+                            .foregroundColor(.pgTextSecondary)
+                    }
+                }
+            }
+            // 連携（匿名→本会員）が完了したら自動で閉じる。
+            .onChange(of: auth.isAnonymous) { _, anon in
+                if !anon { dismiss() }
+            }
         }
         .preferredColorScheme(.dark)
     }
@@ -85,12 +101,13 @@ struct LoginView: View {
                 .font(.system(size: 44, weight: .bold))
                 .foregroundColor(.pgAccent)
                 .neonGlow(color: .pgAccent, radius: 10)
-            Text("PostGuardにログイン")
+            Text("ログイン / アカウント連携")
                 .font(.system(size: 22, weight: .bold))
                 .foregroundColor(.pgTextPrimary)
-            Text("投稿前のリスク分析をはじめましょう")
+            Text("連携すると、機種変更や別端末でも利用状況を引き継げます")
                 .font(.system(size: 13))
                 .foregroundColor(.pgTextSecondary)
+                .multilineTextAlignment(.center)
         }
     }
 

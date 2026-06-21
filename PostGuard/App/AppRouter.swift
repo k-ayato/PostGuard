@@ -7,6 +7,7 @@ final class AppRouter: ObservableObject {
     @Published var showKeyboardSetup = false
     @Published var showAccount = false
     @Published var showPlanSelection = false
+    @Published var showLogin = false
 
     // postguard://result … キーボードの「詳細」
     // postguard://signin … キーボードの「アプリでログイン」（起動すればログインゲートが表示される）

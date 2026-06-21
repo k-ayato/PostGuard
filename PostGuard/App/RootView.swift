@@ -22,15 +22,31 @@ struct RootView: View {
                     InputView()
                 }
             } else {
-                LoginView()
+                // 同意後〜匿名サインイン完了までの短いローディング（5.1.1対応で
+                // ログインゲートは廃止。ログインは任意でAccountから行う）。
+                signingInView
             }
         }
         .onAppear {
             auth.start()
             store.start()
-            Task { await usage.sync() }
+            if hasAgreedToTerms {
+                Task {
+                    await auth.signInAnonymouslyIfNeeded()
+                    await usage.sync()
+                }
+            }
             if auth.isSignedIn {
                 presentPostSignInFlowIfNeeded()
+            }
+        }
+        .onChange(of: hasAgreedToTerms) { _, agreed in
+            // 利用規約に同意したタイミングで匿名サインインを開始する。
+            if agreed {
+                Task {
+                    await auth.signInAnonymouslyIfNeeded()
+                    await usage.sync()
+                }
             }
         }
         .onChange(of: scenePhase) { _, phase in
@@ -51,6 +67,11 @@ struct RootView: View {
                 router.showPlanSelection = false
                 router.showAccount = false
                 router.showHistory = false
+                router.showLogin = false
+                // 本会員ログアウト/退会後もアプリを使い続けられるよう匿名に戻す。
+                if hasAgreedToTerms {
+                    Task { await auth.signInAnonymouslyIfNeeded() }
+                }
             }
         }
         .fullScreenCover(isPresented: $router.showPlanSelection) {
@@ -66,26 +87,34 @@ struct RootView: View {
             }
             .preferredColorScheme(.dark)
         }
-        .sheet(isPresented: $router.showKeyboardSetup) {
-            KeyboardSetupView()
-        }
         .sheet(isPresented: $router.showHistory) {
             HistoryView()
         }
         .sheet(isPresented: $router.showAccount) {
             AccountView()
         }
+        .sheet(isPresented: $router.showLogin) {
+            LoginView()
+        }
+    }
+
+    // 匿名サインイン中の軽量ローディング
+    private var signingInView: some View {
+        ZStack {
+            Color.pgBackground.ignoresSafeArea()
+            ProgressView()
+                .tint(.pgAccent)
+                .scaleEffect(1.3)
+        }
+        .preferredColorScheme(.dark)
     }
 
     // ログイン直後（または既ログインでの初回起動時）のフロー:
-    // プラン未選択ならプラン選択 → 初回はキーボード設定ガイド
+    // プラン未選択ならプラン選択（有料プラン解放時のみ）。キーボード拡張は本バージョンで
+    // 同梱しないため、初回のキーボード設定ガイドは表示しない。
     private func presentPostSignInFlowIfNeeded() {
-        // v1は有料プラン非表示のためプラン選択をスキップ。フラグ解放時のみ表示。
         if FeatureFlags.paidPlansEnabled, !hasSelectedPlan {
             router.showPlanSelection = true
-        } else if !hasSeenOnboarding {
-            hasSeenOnboarding = true
-            router.showKeyboardSetup = true
         }
     }
 }

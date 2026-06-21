@@ -48,20 +48,15 @@ struct KeyboardRootView: View {
     @ViewBuilder
     private var content: some View {
         switch viewModel.phase {
-        case .needsFullAccess:
-            messageView(
-                icon: "lock.shield",
-                iconColor: .pgCaution,
-                title: "フルアクセスが必要です",
-                message: "設定 > 一般 > キーボード > PostGuardKeyboard で「フルアクセスを許可」をオンにしてください。"
-            )
+        case .offline(let text, let warnings):
+            offlineView(text: text, warnings: warnings)
         case .needsSignIn:
             actionMessageView(
                 icon: "person.crop.circle.badge.exclamationmark",
                 iconColor: .pgCaution,
-                title: "ログインが必要です",
-                message: "PostGuardアプリでログインすると、キーボードから分析できるようになります。",
-                buttonTitle: "アプリを開いてログイン"
+                title: "アプリを開いてください",
+                message: "PostGuardアプリを一度開くと、キーボードからAI分析ができるようになります。",
+                buttonTitle: "アプリを開く"
             ) {
                 viewModel.openAppForSignIn()
             }
@@ -151,6 +146,80 @@ struct KeyboardRootView: View {
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 8)
+    }
+
+    // フルアクセスOFF時の画面。端末内の簡易チェック結果を表示しつつ、AI詳細分析の
+    // ためのフルアクセス誘導を添える（4.4.1：OFFでも機能を提供する）。
+    private func offlineView(text: String, warnings: [LocalRiskChecker.Warning]) -> some View {
+        VStack(spacing: 10) {
+            if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                VStack(spacing: 8) {
+                    Image(systemName: "text.bubble")
+                        .font(.system(size: 24))
+                        .foregroundStyle(Color.pgTextSecondary)
+                    Text("投稿文を入力してください。")
+                        .font(.system(size: 14, weight: .bold))
+                        .foregroundStyle(Color.pgTextPrimary)
+                    Text("入力すると、端末内で簡易リスクチェックを行います。")
+                        .font(.system(size: 12))
+                        .foregroundStyle(Color.pgTextSecondary)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 16)
+                }
+                .frame(maxWidth: .infinity)
+            } else {
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack(spacing: 6) {
+                        Image(systemName: warnings.isEmpty ? "checkmark.circle.fill" : "exclamationmark.triangle.fill")
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundStyle(warnings.isEmpty ? Color.pgSafe : Color.pgCaution)
+                        Text(warnings.isEmpty ? "明らかなリスクは見つかりませんでした" : "簡易チェックの注意点")
+                            .font(.system(size: 13, weight: .bold))
+                            .foregroundStyle(Color.pgTextPrimary)
+                    }
+                    if warnings.isEmpty {
+                        Text("これは端末内の簡易チェックです。AIによる詳細分析にはフルアクセスが必要です。")
+                            .font(.system(size: 12))
+                            .foregroundStyle(Color.pgTextSecondary)
+                    } else {
+                        ForEach(warnings) { warning in
+                            HStack(alignment: .top, spacing: 7) {
+                                Image(systemName: warning.icon)
+                                    .font(.system(size: 11))
+                                    .foregroundStyle(Color.pgCaution)
+                                    .frame(width: 16)
+                                Text(warning.message)
+                                    .font(.system(size: 12))
+                                    .foregroundStyle(Color.pgTextSecondary)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            }
+                        }
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(12)
+                .glassCard()
+            }
+
+            VStack(spacing: 3) {
+                HStack(spacing: 5) {
+                    Image(systemName: "sparkles")
+                        .font(.system(size: 11))
+                        .foregroundStyle(Color.pgAccent)
+                    Text("AIによる詳細分析を使うには")
+                        .font(.system(size: 11, weight: .semibold))
+                        .foregroundStyle(Color.pgTextSecondary)
+                }
+                Text("設定 > 一般 > キーボード > PostGuardKeyboard で「フルアクセスを許可」をオン")
+                    .font(.system(size: 10))
+                    .foregroundStyle(Color.pgTextTertiary)
+                    .multilineTextAlignment(.center)
+            }
+            .padding(.horizontal, 12)
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 8)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     }
 
     private func loadingView(title: String, message: String) -> some View {
